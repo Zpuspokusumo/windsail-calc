@@ -27,6 +27,7 @@ func NewCrabclaw() SailType {
 func (Sail *crabclaw) CalcLift(Wind wind.WindType) float32 {
 	var AppVel = float32(0.0)
 	// change
+	// get apparent wind velocity by
 	// (Wind.Velocity * Wind.Velocity)
 
 	lift := 0.5 * Wind.Density * (AppVel * AppVel) * Sail.area * Sail.CalculateCL(Wind.Direction)
@@ -66,6 +67,8 @@ func (Sail *crabclaw) CalculateCL(winddir float32) float32 {
 		CL = 1.25 //guess
 	case 180:
 		CL = 0.9
+	default:
+		CL = 0.0
 	}
 
 	return CL

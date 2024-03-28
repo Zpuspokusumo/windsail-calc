@@ -28,3 +28,13 @@ func SetD(newdir float32) WindType {
 func (wind WindType) CalculateApparentWind() {
 
 }
+
+func (wind WindType) GetRelativeWind(boatdir float32) WindType {
+	//vectorize this
+
+	return WindType{
+		Velocity:  0,
+		Direction: 0,
+		Density:   0,
+	}
+}
