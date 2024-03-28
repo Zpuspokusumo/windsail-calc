@@ -4,12 +4,12 @@ import "WindCalc/vecs"
 
 type WindType struct {
 	Density float64
-	Vector  vecs.MagDirVector
+	Vector  vecs.EuclideanVector
 }
 
 var wind = WindType{
 	Density: 1.225,
-	Vector: vecs.MagDirVector{
+	Vector: vecs.EuclideanVector{
 		Magnitude: 6.6666,
 		Direction: 0,
 	},

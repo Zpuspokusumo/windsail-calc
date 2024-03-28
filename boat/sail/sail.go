@@ -18,7 +18,7 @@ type crabclaw struct {
 	area float64
 	//coefficient float32
 	//trueAngle   float32
-	vector vecs.MagDirVector
+	vector vecs.EuclideanVector
 }
 
 // area in meters
@@ -27,7 +27,7 @@ func NewCrabclaw() SailType {
 		area: 20.0,
 		//coefficient: 1.7,
 		//trueAngle:   0,
-		vector: vecs.MagDirVector{
+		vector: vecs.EuclideanVector{
 			Magnitude: 0,
 			Direction: math.Pi,
 		},

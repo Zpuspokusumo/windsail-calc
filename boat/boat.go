@@ -8,7 +8,7 @@ import (
 
 type Hull struct {
 	Length float64
-	Vector vecs.MagDirVector
+	Vector vecs.EuclideanVector
 }
 
 type Boat struct {
@@ -16,17 +16,21 @@ type Boat struct {
 	Vessel Hull
 }
 
+// position of sail relative to boat, where boat stern is 0 degrees
 func (Wholeship *Boat) GetRelativeSailtoBoat() float64 {
 	x := Wholeship.Sail.GetTrueAngle() - Wholeship.Vessel.Vector.Direction
 	return x
 }
 
+// vector of wind
 func (Boat *Boat) GetRelativeWind(ventus wind.WindType) wind.WindType {
 	//vectorize this
-	vector := vecs.AddVectorsMAGDIR(Boat.Vessel.Vector.ToCartesian(), ventus.Vector.ToCartesian())
+	//vector := vecs.AddVectorsintoEuclidean(Boat.Vessel.Vector.ToCartesian(), ventus.Vector.ToCartesian())
+	//vector := ventus.Vector.ToCartesian().Subtract(Boat.Vessel.Vector.ToCartesian())
+	vector := Boat.Vessel.Vector.ToCartesian().Subtract(ventus.Vector.ToCartesian())
 
 	return wind.WindType{
-		Density: 0,
+		Density: ventus.Density,
 		Vector:  vector,
 	}
 }
