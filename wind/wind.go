@@ -1,40 +1,33 @@
 package wind
 
+import "WindCalc/vecs"
+
 type WindType struct {
-	Velocity  float32
-	Direction float32
-	Density   float32
+	Density float64
+	Vector  vecs.MagDirVector
 }
 
 var wind = WindType{
-	Velocity:  6.6666,
-	Direction: 0,
-	Density:   1.225,
+	Density: 1.225,
+	Vector: vecs.MagDirVector{
+		Magnitude: 6.6666,
+		Direction: 0,
+	},
 }
 
 func GetWind() WindType {
 	return wind
 }
 
-func SetV(newwind float32) WindType {
-	wind.Velocity = newwind
+func SetV(newwind float64) WindType {
+	wind.Vector.Magnitude = newwind
 	return wind
 }
-func SetD(newdir float32) WindType {
-	wind.Direction = newdir
+func SetD(newdir float64) WindType {
+	wind.Vector.Direction = newdir
 	return wind
 }
 
 func (wind WindType) CalculateApparentWind() {
 
-}
-
-func (wind WindType) GetRelativeWind(boatdir float32) WindType {
-	//vectorize this
-
-	return WindType{
-		Velocity:  0,
-		Direction: 0,
-		Density:   0,
-	}
 }
