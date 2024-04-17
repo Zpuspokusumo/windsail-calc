@@ -24,6 +24,23 @@ func (v *EuclideanVector) ToCartesian() CartesianVector {
 	}
 }
 
+func (v *EuclideanVector) ToDegrees() float64 {
+	return v.Direction / math.Pi * 180
+}
+
+func (v *EuclideanVector) InvertDir() *EuclideanVector {
+	newv := &EuclideanVector{
+		Magnitude: v.Magnitude,
+		Direction: v.Direction - math.Pi,
+	}
+	return newv
+}
+
+// Rotate rotates the vector by the specified angle in radians
+func (v EuclideanVector) Rotate(angle float64) EuclideanVector {
+	return EuclideanVector{v.Magnitude, v.Direction + angle}
+}
+
 func AddVectorsintoEuclidean(v1, v2 CartesianVector) EuclideanVector {
 	x1 := v1.x
 	y1 := v1.y
