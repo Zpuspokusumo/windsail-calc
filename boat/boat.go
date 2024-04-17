@@ -34,3 +34,16 @@ func (Boat *Boat) GetRelativeWind(ventus wind.WindType) wind.WindType {
 		Vector:  vector,
 	}
 }
+
+// vector of wind
+func (Boat *Boat) GetApparentWind(ventus wind.WindType) wind.WindType {
+	//vectorize this
+	vector := vecs.AddVectorsintoEuclidean(Boat.Vessel.Vector.InvertDir().ToCartesian(), ventus.Vector.ToCartesian())
+	//vector := ventus.Vector.ToCartesian().Subtract(Boat.Vessel.Vector.ToCartesian())
+	//vector := Boat.Vessel.Vector.InvertDir().ToCartesian().Subtract(ventus.Vector.ToCartesian())
+
+	return wind.WindType{
+		Density: ventus.Density,
+		Vector:  vector,
+	}
+}
