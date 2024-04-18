@@ -3,6 +3,7 @@ package sail
 import (
 	"WindCalc/vecs"
 	"WindCalc/wind"
+	"fmt"
 	"math"
 )
 
@@ -12,6 +13,7 @@ type SailType interface {
 	Spin15degCCW()
 	AddSpeed(float64)
 	GetTrueAngle() float64
+	CalcLift(Wind wind.WindType, BoatDir float64) float64
 }
 
 type crabclaw struct {
@@ -34,13 +36,17 @@ func NewCrabclaw() SailType {
 	}
 }
 
-func (Sail *crabclaw) CalcLift(Wind wind.WindType) float64 {
-	var AppVel = float64(0.0)
+func (Sail *crabclaw) CalcLift(Wind wind.WindType, BoatDir float64) float64 {
+	//var AppVel = float64(0.0)
 	// change
 	// get apparent wind velocity by vector addition
 	// (Wind.Velocity * Wind.Velocity)
+	AppVel := Wind.Vector.Rotate(-BoatDir)
+	//actual apparent wind velocity not calc yet
+	fmt.Printf("App Vel is %f", AppVel.Magnitude)
 
-	lift := 0.5 * Wind.Density * (AppVel * AppVel) * Sail.area * Sail.CalculateCL(Wind.Vector.Direction)
+	fmt.Printf("0.5 * density %f * appvel (%f)^2 * area %f * cl %f", Wind.Density, AppVel.Magnitude, Sail.area, Sail.CalculateCL(Wind.Vector.Direction))
+	lift := 0.5 * Wind.Density * (AppVel.Magnitude * AppVel.Magnitude) * Sail.area * Sail.CalculateCL(Wind.Vector.Direction)
 	//L = 0.5 * ρ * V² * A * C_L
 
 	return lift
@@ -48,39 +54,45 @@ func (Sail *crabclaw) CalcLift(Wind wind.WindType) float64 {
 
 func (Sail *crabclaw) CalculateCL(winddir float64) float64 {
 	//AOA := Sail.trueAngle - winddir
-	AOA := Sail.vector.Direction - winddir
+	AOA := Sail.vector.Rotate(-winddir)
 	var CL float64
 
-	switch AOA {
-	case 0:
+	switch AOA.ToDegrees() {
+	case float64(0):
 		CL = 0 //guess
-	case 15:
+	case float64(15):
 		CL = 0.15
-	case 30:
+	case float64(30):
 		CL = 0.24
-	case 45:
+	case float64(45):
 		CL = 0.65
-	case 60:
+	case float64(60):
 		CL = 1.0
-	case 75:
+	case float64(75):
 		CL = 1.2
-	case 90:
+	case float64(90):
 		CL = 1.45
-	case 105:
+	case float64(105):
 		CL = 1.55 //guess
-	case 120:
+	case float64(120):
 		CL = 1.6
-	case 135:
+	case float64(135):
 		CL = 1.6
-	case 150:
+	case float64(150):
 		CL = 1.4 //guess
-	case 165:
+	case float64(165):
 		CL = 1.25 //guess
-	case 180:
+	case float64(180):
 		CL = 0.9
 	default:
 		CL = 0.0
+		fmt.Println("CL IS 0")
+		fmt.Println("Lift is ", AOA)
+		fmt.Println(AOA.ToDegrees())
 	}
+
+	fmt.Printf("CL is := %f\n", CL)
+	fmt.Println(AOA.ToDegrees())
 
 	return CL
 }

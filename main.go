@@ -3,7 +3,6 @@ package main
 import (
 	"WindCalc/boat"
 	"WindCalc/boat/sail"
-	"WindCalc/tests"
 	"WindCalc/vecs"
 	"WindCalc/wind"
 	"fmt"
@@ -12,16 +11,17 @@ import (
 
 func main() {
 	Wind := vecs.EuclideanVector{
-		Magnitude: 10,
-		Direction: math.Pi / 4, //pi/2 = 90
+		//Magnitude: 10,
+		Magnitude: 5.144,
+		Direction: wind.DIR_22point5_DEGREES,
 		//Direction: math.Pi / 2, //pi/2 = 90
 		//Direction: 0,
 	}
-	Windy := wind.WindType{Density: 1, Vector: Wind}
+	Windy := wind.Wind1ATM(Wind)
 
 	Ship := vecs.EuclideanVector{
-		Magnitude: 10,
-		Direction: 3 * (math.Pi / 4),
+		Magnitude: 5.144,
+		Direction: 3 * wind.DIR_22point5_DEGREES,
 		//Direction: 0,
 		//Direction: math.Pi / 2,
 	}
@@ -35,7 +35,10 @@ func main() {
 
 	fmt.Printf("expected pi/2 = %f\n\n", (math.Pi/2)*-1)
 
-	tests.TestBoatAngleinWind(Shippy, Windy)
+	//tests.TestBoatAngleinWind(Shippy, Windy)
 
-	tests.GPTTEST_RelativeWind()
+	//tests.GPTTEST_RelativeWind()
+
+	fmt.Printf("Lift := %f newtons\n", Shippy.Sail.CalcLift(Windy, Shippy.Vessel.Vector.Direction))
+	// after lift, calculate vessel hydrodynamic drag,
 }
