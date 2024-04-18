@@ -5,6 +5,7 @@ import (
 	"math"
 )
 
+// directions in radians
 type EuclideanVector struct {
 	Magnitude float64
 	Direction float64

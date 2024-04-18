@@ -19,6 +19,13 @@ func GetWind() WindType {
 	return wind
 }
 
+func Wind1ATM(vector vecs.EuclideanVector) WindType {
+	return WindType{
+		Density: wind.Density,
+		Vector:  vector,
+	}
+}
+
 func SetV(newwind float64) WindType {
 	wind.Vector.Magnitude = newwind
 	return wind
