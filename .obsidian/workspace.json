@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "ObsidianNotes/Obsidiannotes.md",
+                "file": "ObsidianNotes/todos.md",
                 "mode": "source",
                 "source": false
               }
@@ -96,7 +96,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "ObsidianNotes/Obsidiannotes.md",
+                "file": "ObsidianNotes/todos.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -113,7 +113,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "ObsidianNotes/Obsidiannotes.md",
+                "file": "ObsidianNotes/todos.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -136,7 +136,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "ObsidianNotes/Obsidiannotes.md"
+                "file": "ObsidianNotes/todos.md"
               }
             }
           }
@@ -159,10 +159,11 @@
   },
   "active": "548b396380586d11",
   "lastOpenFiles": [
+    "ObsidianNotes/Obsidiannotes.md",
+    "ObsidianNotes/todos.md",
     "ObsidianNotes/Wikip_points_of_sail&Sail_angle.png",
     "Untitled.canvas",
     "2024-04-19.md",
-    "ObsidianNotes/Obsidiannotes.md",
     "ObsidianNotes"
   ]
 }
