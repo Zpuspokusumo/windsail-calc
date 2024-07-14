@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "ObsidianNotes/todos.md",
+                "file": "ObsidianNotes/Obsidiannotes.md",
                 "mode": "source",
                 "source": false
               }
@@ -23,14 +23,28 @@
             "id": "548b396380586d11",
             "type": "leaf",
             "state": {
-              "type": "release-notes",
+              "type": "markdown",
               "state": {
-                "currentVersion": "1.5.12"
+                "file": "ObsidianNotes/Obsidiannotes.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "0c6220deef00452e",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "ObsidianNotes/Obsidiannotes.md",
+                "mode": "source",
+                "source": false
               }
             }
           }
         ],
-        "currentTab": 1
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -96,7 +110,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "ObsidianNotes/todos.md",
+                "file": "ObsidianNotes/Obsidiannotes.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -113,7 +127,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "ObsidianNotes/todos.md",
+                "file": "ObsidianNotes/Obsidiannotes.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -136,7 +150,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "ObsidianNotes/todos.md"
+                "file": "ObsidianNotes/Obsidiannotes.md"
               }
             }
           }
@@ -157,10 +171,10 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "548b396380586d11",
+  "active": "0c6220deef00452e",
   "lastOpenFiles": [
-    "ObsidianNotes/Obsidiannotes.md",
     "ObsidianNotes/todos.md",
+    "ObsidianNotes/Obsidiannotes.md",
     "ObsidianNotes/Wikip_points_of_sail&Sail_angle.png",
     "Untitled.canvas",
     "2024-04-19.md",
