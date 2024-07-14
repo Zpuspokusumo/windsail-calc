@@ -24,14 +24,15 @@ type crabclaw struct {
 }
 
 // area in meters
-func NewCrabclaw() SailType {
+func NewCrabclaw(frac float64) SailType {
+	fmt.Printf("saildir = %f * %f = %f \n", math.Pi, frac, math.Pi*frac)
 	return &crabclaw{
 		area: 20.0,
 		//coefficient: 1.7,
 		//trueAngle:   0,
 		vector: vecs.EuclideanVector{
 			Magnitude: 0,
-			Direction: math.Pi,
+			Direction: math.Pi * frac,
 		},
 	}
 }
@@ -45,7 +46,7 @@ func (Sail *crabclaw) CalcLift(Wind wind.WindType, BoatDir float64) float64 {
 	//actual apparent wind velocity not calc yet
 	fmt.Printf("App Vel is %f", AppVel.Magnitude)
 
-	fmt.Printf("0.5 * density %f * appvel (%f)^2 * area %f * cl %f", Wind.Density, AppVel.Magnitude, Sail.area, Sail.CalculateCL(Wind.Vector.Direction))
+	fmt.Printf("0.5 * density %f * appvel (%f)^2 * area %f * cl %f\n", Wind.Density, AppVel.Magnitude, Sail.area, Sail.CalculateCL(Wind.Vector.Direction))
 	lift := 0.5 * Wind.Density * (AppVel.Magnitude * AppVel.Magnitude) * Sail.area * Sail.CalculateCL(Wind.Vector.Direction)
 	//L = 0.5 * ρ * V² * A * C_L
 
@@ -55,6 +56,7 @@ func (Sail *crabclaw) CalcLift(Wind wind.WindType, BoatDir float64) float64 {
 func (Sail *crabclaw) CalculateCL(winddir float64) float64 {
 	//AOA := Sail.trueAngle - winddir
 	AOA := Sail.vector.Rotate(-winddir)
+	fmt.Println("sail dir and wind dir", Sail.vector.Direction, winddir)
 	var CL float64
 
 	switch AOA.ToDegrees() {

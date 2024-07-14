@@ -18,8 +18,19 @@
                 "source": false
               }
             }
+          },
+          {
+            "id": "548b396380586d11",
+            "type": "leaf",
+            "state": {
+              "type": "release-notes",
+              "state": {
+                "currentVersion": "1.5.12"
+              }
+            }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -146,7 +157,7 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "ad08c5dd9ce2e47f",
+  "active": "548b396380586d11",
   "lastOpenFiles": [
     "ObsidianNotes/Wikip_points_of_sail&Sail_angle.png",
     "Untitled.canvas",
