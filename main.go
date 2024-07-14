@@ -9,6 +9,9 @@ import (
 	"math"
 )
 
+// TODO
+// add testing params with
+
 func main() {
 	Wind := vecs.EuclideanVector{
 		//Magnitude: 10,
@@ -26,7 +29,7 @@ func main() {
 		Direction: math.Pi / 2,
 	}
 	Vessel := boat.Hull{Length: 40.0, Vector: Shipv}
-	Shippy := boat.Boat{Sail: sail.NewCrabclaw(float64((1.0 / 2.0) * -1.0)), Vessel: Vessel}
+	Shippy := boat.Boat{Sail: sail.NewCrabclaw(float64((1.0 / 4.0) * -1.0)), Vessel: Vessel}
 	//Shippy := boat.Boat{Sail: sail.NewCrabclaw(float64(1 / 2)), Vessel: Vessel}
 
 	//tests.TestCartesianInverseDir(Wind, Ship)
@@ -40,7 +43,7 @@ func main() {
 
 	//tests.GPTTEST_RelativeWind()
 
-	fmt.Printf("Lift := %f newtons\n", Shippy.Sail.CalcLift(Windy, Shippy.Vessel.Vector.Direction))
+	fmt.Printf("Lift := %f newtons\n", Shippy.Sail.CalcLift(Windy, Shippy.Vessel.Vector))
 	fmt.Printf("direction := %f \n", Shippy.Sail.GetTrueAngle())
 	// after lift, calculate vessel hydrodynamic drag,
 }
