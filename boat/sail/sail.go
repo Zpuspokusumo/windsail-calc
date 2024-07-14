@@ -13,7 +13,7 @@ type SailType interface {
 	Spin15degCCW()
 	AddSpeed(float64)
 	GetTrueAngle() float64
-	CalcLift(Wind wind.WindType, BoatDir float64) float64
+	CalcLift(Wind wind.WindType, BoatDir vecs.EuclideanVector) float64
 }
 
 type crabclaw struct {
@@ -37,14 +37,20 @@ func NewCrabclaw(frac float64) SailType {
 	}
 }
 
-func (Sail *crabclaw) CalcLift(Wind wind.WindType, BoatDir float64) float64 {
+func CalculateApparentWind(Windv, Boatv vecs.EuclideanVector) vecs.EuclideanVector {
+	return vecs.AddVectorsintoEuclidean(Windv.ToCartesian(), Boatv.InvertDir().ToCartesian())
+}
+
+func (Sail *crabclaw) CalcLift(Wind wind.WindType, BoatV vecs.EuclideanVector) float64 {
 	//var AppVel = float64(0.0)
 	// change
 	// get apparent wind velocity by vector addition
 	// (Wind.Velocity * Wind.Velocity)
-	AppVel := Wind.Vector.Rotate(-BoatDir)
+
+	//AppVel := Wind.Vector.Rotate(-BoatDir)
+	AppVel := CalculateApparentWind(Wind.Vector, BoatV)
 	//actual apparent wind velocity not calc yet
-	fmt.Printf("App Vel is %f", AppVel.Magnitude)
+	fmt.Printf("App Vel is %v + %v = %v\n", Wind.Vector, BoatV.InvertDir(), AppVel)
 
 	fmt.Printf("0.5 * density %f * appvel (%f)^2 * area %f * cl %f\n", Wind.Density, AppVel.Magnitude, Sail.area, Sail.CalculateCL(Wind.Vector.Direction))
 	lift := 0.5 * Wind.Density * (AppVel.Magnitude * AppVel.Magnitude) * Sail.area * Sail.CalculateCL(Wind.Vector.Direction)
@@ -53,13 +59,17 @@ func (Sail *crabclaw) CalcLift(Wind wind.WindType, BoatDir float64) float64 {
 	return lift
 }
 
+// calculates lift coefficient based on relative angle of sail to
 func (Sail *crabclaw) CalculateCL(winddir float64) float64 {
 	//AOA := Sail.trueAngle - winddir
 	AOA := Sail.vector.Rotate(-winddir)
 	fmt.Println("sail dir and wind dir", Sail.vector.Direction, winddir)
 	var CL float64
-
-	switch AOA.ToDegrees() {
+	AOA2 := AOA.ToDegrees()
+	if math.Signbit(AOA2) {
+		AOA2 *= -1.0
+	}
+	switch AOA2 {
 	case float64(0):
 		CL = 0 //guess
 	case float64(15):
@@ -88,8 +98,7 @@ func (Sail *crabclaw) CalculateCL(winddir float64) float64 {
 		CL = 0.9
 	default:
 		CL = 0.0
-		fmt.Println("CL IS 0")
-		fmt.Println("Lift is ", AOA)
+		fmt.Println("CL IS 0 ", "Lift is ", AOA)
 		fmt.Println(AOA.ToDegrees())
 	}
 
@@ -109,11 +118,6 @@ func (Sail *crabclaw) Spin15degCCW() {
 
 func (Sail *crabclaw) GetTrueAngle() float64 {
 	return Sail.vector.Direction
-}
-
-func crabclawCLForDegrees(angle float32) float32 {
-
-	return 0.0
 }
 
 func (Sail *crabclaw) AddSpeed(spd float64) {
